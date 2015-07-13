@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <title>Payment</title>
+</head>
+    
+<body>
+    <header>
+        <div class="container">
+            <h1 id=result>PAYMENT</h1>
+        </div>
+    </header>
+    
+    <div class="container">
+        
+        <div class="col-md-6">
+            
+            <div class="form-group">
+                <label>Price</label>
+                <input class="form-control" id="ordPrice" placeholder="E.g 100">
+            </div>
+            
+            <div class="form-group">
+                <label>Currency</label>
+                 <select name="ordCurrency" id="ordCurrency">
+                    <option selected value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="THB">THB</option>
+                    <option value="HKD">HKD</option>
+                    <option value="SGD">SGD</option>
+                    <option value="AUD">AUD</option>
+                 </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Customer Full name</label>
+                <input class="form-control" id="ordFullName" placeholder="E.g Cafer Kara">
+            </div>
+            
+            <div class="form-group">
+                <label>Credit card first name</label>
+                <input class="form-control" id="cardFirstName" placeholder="E.g Mustafa">
+            </div>
+            
+            <div class="form-group">
+                <label>Credit card last name</label>
+                <input class="form-control" id="cardLastName" placeholder="E.g Kara">
+            </div>
+            
+            <div class="form-group">
+                <label>Credit card number</label>
+                <input class="form-control" id="cardNumber"  placeholder="E.g 4417119669820331">
+            </div>
+            
+             <div class="form-group">
+                <label>Credit card expiration (month)</label>
+                <input class="form-control" id="cardExpMonth" placeholder="E.g 11">
+            </div>
+            
+            <div class="form-group">
+                <label>Credit card expiration(year)</label>
+                <input class="form-control" id="cardExpYear" placeholder="E.g 2018">
+            </div>
+            
+             <div class="form-group">
+                <label>Credit card CCV (3 or 4 digits)</label>
+                <input class="form-control" id="cardCVV" placeholder="E.g 874">
+            </div>
+                  
+             <div class="form-group">
+              <button id="btnSubmit" type="button" class="btn btn-primary">Submit</button>
+            </div>
+            
+        </div>
+        
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            $("#btnSubmit").click(function(){
+                var self = this;
+               
+                var ordPrice = $('#ordPrice').val();
+                var ordCurrency = $('#ordCurrency').val();
+                var ordFullName = $('#ordFullName').val();
+                var cardFirstName = $('#cardFirstName').val();
+                var cardLastName = $('#cardLastName').val();
+                var cardNumber = $('#cardNumber').val();
+                var cardExpMonth = $('#cardExpMonth').val();
+                var cardExpYear = $('#cardExpYear').val();
+                var cardCVV = $('#cardCVV').val();
+                
+                var regexPrice = /^(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?$/;
+                if (!regexPrice.test(ordPrice)) {
+                   alert("Price is not valid");
+                }
+                
+                var regexNames = /^[a-z ]+$/i;
+                if(!regexNames.test(ordFullName)){
+                    alert("Full name not valid");
+                    return;
+                }
+                
+                if(!regexNames.test(cardFirstName)){
+                    alert("Credit card first name not valid");
+                    return;
+                }
+                
+                if(!regexNames.test(cardLastName)){
+                    alert("Credit card last name not valid");
+                    return;
+                }
+                
+                var regexMonth =  /^(0?[1-9]|1[012])$/;
+                if(!regexMonth.test(cardExpMonth)){
+                    alert("Expiration month not valid");
+                    return;
+                }
+                
+                var regexYear = /^\d{4}$/;
+                if(!regexYear.test(cardExpYear)){
+                    alert("Expiration year not valid");
+                    return;
+                }
+                
+                var regexCVV = /^[0-9]{3,4}$/;
+                if(!regexCVV.test(cardCVV)){
+                    alert("CCV not valid");
+                    return;
+                }
+                    
+                var data = {
+                    "orderTotal" : ordPrice,
+                    "orderCurrency" : ordCurrency,
+                    "orderFullName" : ordFullName,
+                    "cardFirstName" : cardFirstName,
+                    "cardLastName" : cardLastName,
+                    "cardNumber": cardNumber,
+                    "cardExpMonth" : cardExpMonth,
+                    "cardExpYear" : cardExpYear,
+                    "cardCVV" : cardCVV
+                };
+                
+                $(self).prop( "disabled", true );
+                $("#result").text("PAYMENT BEING PROCESSED...");
+
+               $.ajax({
+                    type: 'POST',
+                    data : JSON.stringify(data),
+                    contentType: 'application/json',
+                    url: '/order/payment',
+                    error: function  (error) {
+                        $("#result").text("PAYMENT FAILED");
+                        var response = JSON.parse(error.responseText);
+                        alert(response.msg);
+                    },
+                    success: function (data) {
+                        if(data.succeed){
+                            $("#result").text("PAYMENT SUCCEEDED");
+                        }else {
+                            $("#result").text("PAYMENT FAILED");
+                            if(data.msg){
+                                alert(data.msg);
+                            }
+                        }
+                    },
+                    complete: function (argument) {
+                        $(self).prop("disabled", false );
+                    }
+                });
+            });
+        });
+      
+    </script>
+</body>

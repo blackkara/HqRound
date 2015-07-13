@@ -1,0 +1,31 @@
+{
+  "name": "HotelQuickly",
+  "version": "1.0.0",
+  "description": "HotelQuickly Round",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blackkara/HqRound.git"
+  },
+  "author": "Mustafa <karamusti@gmail.com> (mustafa@mustafa.be)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blackkara/HqRound/issues"
+  },
+  "homepage": "https://github.com/blackkara/HqRound",
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "braintree": "^1.26.0",
+    "ejs": "^2.3.2",
+    "express": "^4.13.1",
+    "mocha": "^2.2.5",
+    "mongodb": "^2.0.36",
+    "paypal-rest-sdk": "^1.6.0"
+  },
+  "devDependencies": {
+    "supertest": "^1.0.1"
+  }
+}

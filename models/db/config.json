@@ -1,0 +1,7 @@
+{
+    "host" : "ds047762.mongolab.com",
+    "port" : 47762,
+    "db" : "hq",
+    "user" : "hq",
+    "password" : "12345"
+}
