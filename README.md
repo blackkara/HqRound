@@ -15,3 +15,8 @@ To test application (test includes async operations, so it needs recursive and t
 ```
 mocha --recursive --timeout 30000
 ```
+
+```
+Runs on
+http://localhost:3000/index
+```
