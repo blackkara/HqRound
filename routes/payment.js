@@ -15,6 +15,8 @@ router.post('/payment', function(req, res, next){
         "orderCurrency" : req.body.orderCurrency,
         "orderFullName" : req.body.orderFullName
     };
+
+    
     var payment = new Payment(paymentData);
 
     payment.makePayment(function (error, response) {

@@ -20,3 +20,49 @@ mocha --recursive --timeout 30000
 Runs on
 http://localhost:3000/index
 ```
+
+After braintree payment db record
+```json
+{
+    "_id": {
+        "$oid": "55a8ae50e6eb42180faf2f66"
+    },
+    "cardNumber": "4012888888881881",
+    "cardFirstName": "Mustafa",
+    "cardLastName": "Kara",
+    "cardCVV": 874,
+    "cardType": "visa",
+    "orderTotal": "5.00",
+    "orderCurrency": "HKD",
+    "orderFullName": "Cafer Kara",
+    "gateway": "braintree",
+    "gatewayResponseId": "drdkzt",
+    "gatewayResponseCreateTime": "Fri Jul 17 2015 10:27:10 GMT+0300 (Türkiye Yaz Saati)",
+    "gatewayResponseUpdateTime": "Fri Jul 17 2015 10:27:10 GMT+0300 (Türkiye Yaz Saati)",
+    "gatewayResponseIntent": "sale",
+    "gatewayResponseStatus": "authorized"
+}
+```
+
+After paypal payment db record
+```json
+{
+    "_id": {
+        "$oid": "55a320c1fdca723408bbb763"
+    },
+    "cardNumber": "378282246310005",
+    "cardFirstName": "İsmail",
+    "cardLastName": "Kara",
+    "cardCVV": 874,
+    "cardType": "amex",
+    "orderTotal": "100",
+    "orderCurrency": "USD",
+    "orderFullName": "Cafer",
+    "gateway": "paypal",
+    "gatewayResponseId": "PAY-3GU213534H253803VKWRSBNI",
+    "gatewayResponseCreateTime": "Mon Jul 13 2015 05:21:53 GMT+0300 (Türkiye Yaz Saati)",
+    "gatewayResponseUpdateTime": "Mon Jul 13 2015 05:21:53 GMT+0300 (Türkiye Yaz Saati)",
+    "gatewayResponseIntent": "sale",
+    "gatewayResponseStatus": "approved"
+}
+```
