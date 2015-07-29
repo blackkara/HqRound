@@ -7,16 +7,16 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.set("view engine", "ejs");
 app.use("/order", require("./routes/payment"));
-app.get('/index', function(req, res){
-   	res.render('index.ejs');
+app.get('/payment', function(req, res){
+  res.render('index.ejs');
 });
 
 app.use(function(err, req, res, next) {
-  	res.status(err.status || 500);
-  	res.send({
-  		"succeed" : false,
-  		"msg" : err.message
-  	});
+  res.status(err.status || 500);
+  res.send({
+    "succeed" : false,
+  	"msg" : err.message
+  });
 });
 
 app.set('port', process.env.PORT || 3000);

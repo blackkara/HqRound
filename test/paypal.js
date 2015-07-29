@@ -1,7 +1,7 @@
 var paypal = require("../lib/gateways/paypal");
 var assert = require("assert");
 
-describe('generates payment data for AmericanExpress card in paypal', function(){ 
+describe('generates payment data for AmericanExpress card in paypal', function(){
 
 
     it("payment needs expiration month of the card", function(){
@@ -20,7 +20,7 @@ describe('generates payment data for AmericanExpress card in paypal', function()
         });
     });
 
-    
+
     it("payment needs expiration year of the card", function(){
         assert.throws(function () {
             var data = paypal.generatePaymentData({
@@ -80,7 +80,7 @@ describe('generates payment data for AmericanExpress card in paypal', function()
             cardLastName : "Kara",
             orderCurrency : "USD",
             orderTotal : "5.00"
-        }
+        };
         var data = paypal.generatePaymentData(paymenData);
 
         assert.equal(paymenData.cardNumber, data.payer.funding_instruments[0].credit_card.number);
@@ -98,10 +98,10 @@ describe('generates payment data for AmericanExpress card in paypal', function()
 
 describe('process of paypal payment', function () {
 
-    // paypal operation takes so long time, to run test below
-    // uncomment and run 'mocha --recursive --timeout 60000'
-    
-    /*it("makes payment with payment data", function(done){
+    // paypal operation takes so long time, to run test well,
+    // increase the timeout parameter, now its 60000 ms
+    // 'mocha --recursive --timeout 60000'
+    it("makes payment with payment data", function(done){
 
         var data = {
             cardNumber : "378282246310005",
@@ -113,13 +113,13 @@ describe('process of paypal payment', function () {
             cardLastName : "Kara",
             orderCurrency : "USD",
             orderTotal : "5.00"
-        }
-        
+        };
+
         paypal.makePayment(data, function(error, payment){
-            assert.equal(null, error)
+            assert.equal(null, error);
             assert.notEqual(null, payment);
             done();
         });
-    });*/
+    });
 
 });

@@ -10,15 +10,15 @@ npm install
 node server.js
 ```
 
-To test application (test includes async operations, so it needs recursive and timeout parameters)
+To test application (test includes async operations and sub directory tests, so it uses recursive and timeout parameters in package.json)
 
 ```
-mocha --recursive --timeout 30000
+npm test
 ```
 
 ```
 Runs on
-http://localhost:3000/index
+http://localhost:3000/payment
 ```
 
 After braintree payment db record

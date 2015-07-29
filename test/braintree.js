@@ -1,7 +1,7 @@
 var braintree = require("../lib/gateways/braintree");
 var assert = require("assert");
 
-describe('generates payment data for Visa and MasterCard cards in braintree', function(){ 
+describe('generates payment data for Visa and MasterCard cards in braintree', function(){
 
 
     it("payment needs expiration month of the card", function(){
@@ -20,7 +20,7 @@ describe('generates payment data for Visa and MasterCard cards in braintree', fu
         });
     });
 
-    
+
     it("payment needs expiration year of the card", function(){
         assert.throws(function () {
            var data = paypal.generatePaymentData({
@@ -70,7 +70,7 @@ describe('process of braintree payment', function () {
                 orderCurrency : "HKD",
                 orderTotal : "5.00"
         };
-        
+
         braintree.makePayment(data, function(error, payment){
             assert.equal(null, error)
             assert.notEqual(null, payment);
