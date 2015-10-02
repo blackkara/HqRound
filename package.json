@@ -4,6 +4,7 @@
   "description": "HotelQuickly Round",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "mocha --recursive --timeout 60000"
   },
   "repository": {

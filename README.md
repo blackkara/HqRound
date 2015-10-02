@@ -7,7 +7,7 @@ To start application, it needs to install needed dependencies, mainly they are e
 
 ```
 npm install
-node server.js
+npm start
 ```
 
 To test application (test includes async operations and sub directory tests, so it uses recursive and timeout parameters in package.json)
